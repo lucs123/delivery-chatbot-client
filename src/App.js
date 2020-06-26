@@ -1,10 +1,14 @@
-import React from 'react';
+import React,{Component} from 'react';
 import './App.css';
-import {Grid,makeStyles,Typography} from '@material-ui/core';
+import {Grid,withStyles} from '@material-ui/core';
 import ResponsiveDrawer from './components/Drawer.js'
 import Table from './components/Table.js'
+import socketIOClient from "socket.io-client";
 
-const useStyles = makeStyles((theme) => ({
+const ENDPOINT = "localhost:5000";
+const socket = socketIOClient(ENDPOINT);
+
+const styles = (theme) => ({
   root: {
     display: 'flex',
   },
@@ -15,24 +19,46 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
 })
-)
 
-function App() {
-  const classes = useStyles();
-  return (
-    <div className="root">
-        <Grid container>
-          <Grid item xs={'auto'}>  
-            <ResponsiveDrawer/>
-          </Grid>
-          <div className={classes.table}>  
-            <Grid item xs={'auto'}>
-                <Table/>
-            </Grid>
-          </div>
-        </Grid>
-    </div>
-  );
+class App extends Component {
+	state = {
+		pedidos: [],
+	}
+
+	componentDidMount() {
+		fetch('https://fierce-mountain-64147.herokuapp.com/pedidos')
+		.then(response=>(
+			response.json()))
+		.then(response=>{
+					this.setState({pedidos: response});
+		})
+		socket.on("FromAPI", data => {
+        	console.log(data);
+        	let pedidos = this.state.pedidos;
+			const newPedidos = pedidos.concat(data)
+			this.setState({pedidos: newPedidos})
+        	console.log('in cdd:',this.state.pedidos)	
+		})
+    	return () => socket.disconnect();
+	}
+
+	render () {
+    	const { classes } = this.props;
+		return (
+		<div className="root">
+		    <Grid container>
+		      <Grid item xs={'auto'}>  
+		        <ResponsiveDrawer/>
+		      </Grid>
+		      <div className={classes.table}>  
+		        <Grid item xs={'auto'}>
+		            <Table pedidos={this.state.pedidos}/>
+		        </Grid>
+		      </div>
+		    </Grid>
+		</div>
+		);
+    }
 }
 
-export default App;
+export default withStyles(styles)(App);
