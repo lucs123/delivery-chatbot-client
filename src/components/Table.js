@@ -17,6 +17,8 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import MotorcycleIcon from '@material-ui/icons/Motorcycle';
+import TimelapseIcon from '@material-ui/icons/Timelapse';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -35,26 +37,75 @@ const tableIcons = {
     Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
     SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
 function Table(props) {
-    console.log('in table:',props.pedidos)  
     return (
   <MaterialTable
     icons={tableIcons}
     columns={[
-      { title: 'Nº do pedido', field: 'id', defaultSort:'desc'},
-      { title: 'Pedido', field: 'pedido' },
-      { title: 'Valor', field: 'valor' },
-      { title: 'Forma de entrega', field: 'formaEntrega'},
-      { title: 'Endereço', field: 'endereco'},
-      { title: 'Status', field: 'status'}
+      { title: 'Nº do pedido', field: 'id', defaultSort:'desc', width: 100},
+      { title: 'Pedido', field: 'pedido', width:190 },
+      { title: 'Valor', field: 'valor' , width:100},
+      { title: 'Forma de entrega', field: 'formaEntrega', width: 180},
+      { title: 'Endereço', field: 'endereco', width:190},
+      { title: 'Status', field: 'status', width:110, defaultFilter:''}
     ]}
     data={props.pedidos}
+    
     title="Todos os pedidos"
+    
     options={{
-      // sorting: false
+      filterCellStyle: {display:'none'},
+      filtering: true,
+      headerStyle: {
+        fontWeight: 'bold'
+      },
+      addRowPosition: 'first',
+      columnsButton: 'true',
+      exportButton: 'true',
+      paging: false,
+      draggable: false,
+      actionsColumnIndex: -1      
+    }}
+
+    actions={[
+    {
+      icon: TimelapseIcon,
+      tooltip: 'Fazendo',
+      onClick: (event, rowData) => {
+        props.changeStatus(rowData)
+      }
+    },
+    {
+      icon: MotorcycleIcon,
+      tooltip: 'Para entrega',
+      onClick: (event, rowData) => {
+        props.changeStatus(rowData)
+      }
+    },
+    {
+      icon: Check,
+      tooltip: 'Finalizado',
+      onClick: (event, rowData) => {
+        props.changeStatus(rowData)
+      }
+    }
+  ]}
+    localization={{
+        body: {
+          emptyDataSourceMessage: 'Nenhum registro para exibir'
+        },
+        toolbar: {
+          searchTooltip: 'Pesquisar',
+          searchPlaceholder: 'Pesquisar',
+          showColumnsTitle: 'Mostrar colunas',
+          showColumnsAriaLabel: 'Mostrar colunas',
+          addRemoveColumns: 'Adiciona ou remove colunas',
+          exportTitle: 'Baixar',
+          exportName: 'Baixar planilha',
+        },
     }}
   />
     );

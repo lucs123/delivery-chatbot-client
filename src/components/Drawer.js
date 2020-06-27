@@ -13,11 +13,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
+import MotorcycleIcon from '@material-ui/icons/Motorcycle';
+import TimelapseIcon from '@material-ui/icons/Timelapse';
+import DoneIcon from '@material-ui/icons/Done';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const drawerWidth = 240;
+const listItems = ['Todos', 'Novos', 'Fazendo', 'Para entrega', 'Finalizado', ]
+const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />]
+
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,9 +67,9 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {['Todos', 'Entregues', 'Na fila'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+        {listItems.map((text, index) => (
+          <ListItem button key={text} onClick={props.changePage(text)}>
+            <ListItemIcon>{icons[index]}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}

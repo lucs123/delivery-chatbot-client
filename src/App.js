@@ -16,7 +16,7 @@ const styles = (theme) => ({
     paddingTop: "68px",
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
   },
 })
 
@@ -42,17 +42,27 @@ class App extends Component {
     	return () => socket.disconnect();
 	}
 
+	changePage = (e)=>{
+		console.log('hello')
+		console.log(e)		
+	}
+
+	changeStatus = (e)=>{
+		console.log('hello')
+		console.log(e)
+	}
+
 	render () {
     	const { classes } = this.props;
 		return (
 		<div className="root">
 		    <Grid container>
 		      <Grid item xs={'auto'}>  
-		        <ResponsiveDrawer/>
+		        <ResponsiveDrawer changePage={this.changePage}/>
 		      </Grid>
 		      <div className={classes.table}>  
 		        <Grid item xs={'auto'}>
-		            <Table pedidos={this.state.pedidos}/>
+		            <Table pedidos={this.state.pedidos} changeStatus={this.changeStatus}/>
 		        </Grid>
 		      </div>
 		    </Grid>
