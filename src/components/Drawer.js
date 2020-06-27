@@ -21,7 +21,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const listItems = ['Todos', 'Novos', 'Fazendo', 'Para entrega', 'Finalizado', ]
+const status = ['Todos','Novo','Fazendo','Para entrega','Finalizado'];
 const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />]
 
 const drawerWidth = 200;
@@ -67,10 +67,10 @@ function ResponsiveDrawer(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {listItems.map((text, index) => (
-          <ListItem button key={text} onClick={props.changePage(text)}>
+        {status.map((item, index) => (
+          <ListItem button key={item} onClick={props.changePage.bind(props,item)}>
             <ListItemIcon>{icons[index]}</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={item} />
           </ListItem>
         ))}
         </List>

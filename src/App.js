@@ -21,10 +21,25 @@ const styles = (theme) => ({
 })
 
 class App extends Component {
-	state = {
-		pedidos: [],
+	constructor(){
+		super();
+		// this.status = ['Todos','Novos','Fazendo','Para entrega','Finalizado'];
+		// 	{id :1,
+		// 	 name:'Todos'},
+		// 	{id: 2,
+		// 	 name: 'Novos'},
+		// 	{id: 3,
+		// 	 name: 'Fazendo'},
+		// 	{id: 4,
+		// 	 name: 'Para entrega'},
+		// 	{id: 5,
+		// 	 name: 'Finalizado'} 
+		// ];
+		this.state = {
+			status: 'Todos',
+			pedidos: [],
+		};
 	}
-
 	componentDidMount() {
 		fetch('https://fierce-mountain-64147.herokuapp.com/pedidos')
 		.then(response=>(
@@ -42,14 +57,28 @@ class App extends Component {
     	return () => socket.disconnect();
 	}
 
-	changePage = (e)=>{
-		console.log('hello')
-		console.log(e)		
+	changePage = (id)=>{
+		if(id !== this.state.status){
+			this.setState({status: id})
+		}
 	}
 
-	changeStatus = (e)=>{
-		console.log('hello')
-		console.log(e)
+	changeStatus = (rowData,status)=>{
+		this.setState(prevState=>{
+			const pedidos = prevState.pedidos.map(pedido=>{
+			if(pedido.id === rowData.id){
+				pedido.status = status;
+				return pedido
+			}
+			else{
+				return pedido
+			}
+			});
+			return{
+				pedidos,
+			}
+		})
+		this.forceUpdate()
 	}
 
 	render () {
@@ -58,11 +87,11 @@ class App extends Component {
 		<div className="root">
 		    <Grid container>
 		      <Grid item xs={'auto'}>  
-		        <ResponsiveDrawer changePage={this.changePage}/>
+		        <ResponsiveDrawer status={this.status} changePage={this.changePage}/>
 		      </Grid>
 		      <div className={classes.table}>  
 		        <Grid item xs={'auto'}>
-		            <Table pedidos={this.state.pedidos} changeStatus={this.changeStatus}/>
+		            <Table pedidos={this.state.pedidos} changeStatus={this.changeStatus} status={this.state.status}/>
 		        </Grid>
 		      </div>
 		    </Grid>

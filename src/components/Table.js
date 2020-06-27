@@ -40,6 +40,7 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
+
 function Table(props) {
     return (
   <MaterialTable
@@ -48,13 +49,14 @@ function Table(props) {
       { title: 'Nº do pedido', field: 'id', defaultSort:'desc', width: 100},
       { title: 'Pedido', field: 'pedido', width:190 },
       { title: 'Valor', field: 'valor' , width:100},
-      { title: 'Forma de entrega', field: 'formaEntrega', width: 180},
+      { title: 'Forma de entrega', field: 'formaentrega', width: 180},
       { title: 'Endereço', field: 'endereco', width:190},
-      { title: 'Status', field: 'status', width:110, defaultFilter:''}
+      { title: 'Status', field: 'status', width:110, 
+      defaultFilter:(props.status==='Todos' ? '':props.status), hidden:(props.status==='Todos')?false:true}
     ]}
     data={props.pedidos}
     
-    title="Todos os pedidos"
+    title={props.status}
     
     options={{
       filterCellStyle: {display:'none'},
@@ -71,29 +73,35 @@ function Table(props) {
     }}
 
     actions={[
-    {
-      icon: TimelapseIcon,
-      tooltip: 'Fazendo',
-      onClick: (event, rowData) => {
-        props.changeStatus(rowData)
-      }
-    },
-    {
-      icon: MotorcycleIcon,
-      tooltip: 'Para entrega',
-      onClick: (event, rowData) => {
-        props.changeStatus(rowData)
-      }
-    },
-    {
-      icon: Check,
-      tooltip: 'Finalizado',
-      onClick: (event, rowData) => {
-        props.changeStatus(rowData)
-      }
-    }
+        {
+          icon: TimelapseIcon,
+          hidden: (props.status === 'Fazendo')? true:false,
+          tooltip: 'Fazendo',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Fazendo')
+          }
+        },
+        {
+          icon: MotorcycleIcon,
+          hidden: (props.status === 'Para entrega')? true:false,
+          tooltip: 'Para entrega',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Para entrega')
+          }
+        },
+        {
+          icon: Check,
+          hidden: (props.status === 'Finalizado')? true:false,
+          tooltip: 'Finalizado',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Finalizado');
+          }
+        }
   ]}
     localization={{
+        header:{
+          actions:'Mudar status'
+        },
         body: {
           emptyDataSourceMessage: 'Nenhum registro para exibir'
         },
