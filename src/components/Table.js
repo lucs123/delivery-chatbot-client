@@ -19,6 +19,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -42,6 +43,70 @@ const tableIcons = {
 
 
 function Table(props) {
+  let acoes = [
+        {
+          icon: TimelapseIcon,
+          hidden: (props.status === 'Fazendo')? true:false,
+          tooltip: 'Fazendo',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Fazendo')
+          }
+        },
+        {
+          icon: MotorcycleIcon,
+          hidden: (props.status === 'Para entrega')? true:false,
+          tooltip: 'Para entrega',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Para entrega')
+          }
+        },
+        {
+          icon: Check,
+          hidden: (props.status === 'Finalizado')? true:false,
+          tooltip: 'Finalizado',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Finalizado');
+          },
+        },
+
+  ]  
+
+  let acoesDel = [
+        {
+          icon: TimelapseIcon,
+          hidden: (props.status === 'Fazendo')? true:false,
+          tooltip: 'Fazendo',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Fazendo')
+          }
+        },
+        {
+          icon: MotorcycleIcon,
+          hidden: (props.status === 'Para entrega')? true:false,
+          tooltip: 'Para entrega',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Para entrega')
+          }
+        },
+        {
+          icon: Check,
+          hidden: (props.status === 'Finalizado')? true:false,
+          tooltip: 'Finalizado',
+          onClick: (event, rowData) => {
+            props.changeStatus(rowData,'Finalizado');
+          },
+        },
+        
+        {
+          tooltip: 'Remover pedido',
+          icon: DeleteIcon,
+          onClick:(event, rowData) => {
+            console.log(rowData)
+            props.remove(rowData);
+          }
+        }
+  ]  
+
     return (
   <MaterialTable
     icons={tableIcons}
@@ -71,35 +136,13 @@ function Table(props) {
       exportButton: 'true',
       paging: false,
       draggable: false,
-      actionsColumnIndex: -1      
+      actionsColumnIndex: -1,
+      // selection: (props.status === 'Finalizado')?true:false, 
+      actionsCellStyle: {width:40}     
     }}
 
-    actions={[
-        {
-          icon: TimelapseIcon,
-          hidden: (props.status === 'Fazendo')? true:false,
-          tooltip: 'Fazendo',
-          onClick: (event, rowData) => {
-            props.changeStatus(rowData,'Fazendo')
-          }
-        },
-        {
-          icon: MotorcycleIcon,
-          hidden: (props.status === 'Para entrega')? true:false,
-          tooltip: 'Para entrega',
-          onClick: (event, rowData) => {
-            props.changeStatus(rowData,'Para entrega')
-          }
-        },
-        {
-          icon: Check,
-          hidden: (props.status === 'Finalizado')? true:false,
-          tooltip: 'Finalizado',
-          onClick: (event, rowData) => {
-            props.changeStatus(rowData,'Finalizado');
-          }
-        }
-  ]}
+    actions={(props.status !== 'Finalizado')?acoes : acoesDel}
+
     localization={{
         header:{
           actions:'Mudar status'
@@ -120,6 +163,7 @@ function Table(props) {
   />
     );
   };
+
 
 export default Table;
 

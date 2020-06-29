@@ -15,13 +15,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
 import DoneIcon from '@material-ui/icons/Done';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
-const status = ['Todos','Novo','Fazendo','Para entrega','Finalizado'];
-const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />]
+const status = ['Todos','Novo','Fazendo','Para entrega', 'Aguardando retirada', 'Finalizado'];
+const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />, <DoneAllIcon />]
 
 const drawerWidth = 200;
 

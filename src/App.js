@@ -71,6 +71,17 @@ class App extends Component {
 		})
 	}
 
+	remove = (rowData)=>{
+		  let newPedidos = [...this.state.pedidos];
+		  let index = newPedidos.indexOf(rowData)
+		  console.log(index)
+		  if (index !== -1) {
+		    newPedidos.splice(index, 1);
+		    this.setState({pedidos: newPedidos});
+		    socket.emit('remove',rowData)
+		  }
+	}
+
 	render () {
     	const { classes } = this.props;
 		return (
@@ -81,7 +92,8 @@ class App extends Component {
 		      </Grid>
 		      <div className={classes.table}>  
 		        <Grid item xs={'auto'}>
-		            <Table pedidos={this.state.pedidos} changeStatus={this.changeStatus} status={this.state.status}/>
+		            <Table pedidos={this.state.pedidos} changeStatus={this.changeStatus} 
+		            status={this.state.status} remove={this.remove}/>
 		        </Grid>
 		      </div>
 		    </Grid>
