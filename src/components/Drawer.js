@@ -11,7 +11,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import TimelapseIcon from '@material-ui/icons/Timelapse';

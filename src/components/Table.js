@@ -52,9 +52,11 @@ function Table(props) {
       { title: 'Forma de entrega', field: 'formaentrega', width: 180},
       { title: 'Endereço', field: 'endereco', width:190},
       { title: 'Status', field: 'status', width:110, 
-      defaultFilter:(props.status==='Todos' ? '':props.status), hidden:(props.status==='Todos')?false:true}
+       hidden:(props.status==='Todos')?false:true}
     ]}
-    data={props.pedidos}
+    
+    data={(props.status ==='Todos')?props.pedidos:
+    props.pedidos.filter(pedido=>(pedido.status === props.status))}
     
     title={props.status}
     

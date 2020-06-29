@@ -5,7 +5,9 @@ import ResponsiveDrawer from './components/Drawer.js'
 import Table from './components/Table.js'
 import socketIOClient from "socket.io-client";
 
+//  for local
 const ENDPOINT = "localhost:5000";
+// const ENDPOINT = "https://fierce-mountain-64147.herokuapp.com/";
 const socket = socketIOClient(ENDPOINT);
 
 const styles = (theme) => ({
@@ -23,18 +25,6 @@ const styles = (theme) => ({
 class App extends Component {
 	constructor(){
 		super();
-		// this.status = ['Todos','Novos','Fazendo','Para entrega','Finalizado'];
-		// 	{id :1,
-		// 	 name:'Todos'},
-		// 	{id: 2,
-		// 	 name: 'Novos'},
-		// 	{id: 3,
-		// 	 name: 'Fazendo'},
-		// 	{id: 4,
-		// 	 name: 'Para entrega'},
-		// 	{id: 5,
-		// 	 name: 'Finalizado'} 
-		// ];
 		this.state = {
 			status: 'Todos',
 			pedidos: [],
@@ -68,6 +58,7 @@ class App extends Component {
 			const pedidos = prevState.pedidos.map(pedido=>{
 			if(pedido.id === rowData.id){
 				pedido.status = status;
+				socket.emit('changeStatus',pedido)
 				return pedido
 			}
 			else{
@@ -78,7 +69,6 @@ class App extends Component {
 				pedidos,
 			}
 		})
-		this.forceUpdate()
 	}
 
 	render () {
