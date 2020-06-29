@@ -53,22 +53,21 @@ function Table(props) {
           }
         },
         {
-          icon: MotorcycleIcon,
-          hidden: (props.status === 'Para entrega')? true:false,
-          tooltip: 'Para entrega',
-          onClick: (event, rowData) => {
-            props.changeStatus(rowData,'Para entrega')
-          }
-        },
-        {
           icon: Check,
           hidden: (props.status === 'Finalizado')? true:false,
-          tooltip: 'Finalizado',
+          tooltip: ((props.status === 'Aguardando retirada')||(props.status === 'Para entrega'))?'Finalizado':'Pronto',
           onClick: (event, rowData) => {
-            props.changeStatus(rowData,'Finalizado');
-          },
-        },
-
+            if((props.status === 'Aguardando retirada')||(props.status === 'Para entrega')){
+              props.changeStatus(rowData,'Finalizado');
+           }
+           else if(rowData.formaentrega === 'retirada'){
+            props.changeStatus(rowData,'Aguardando retirada');  
+           }
+           else if(rowData.formaentrega === 'entrega'){
+            props.changeStatus(rowData,'Para entrega');  
+          }
+        }
+      }
   ]  
 
   let acoesDel = [
