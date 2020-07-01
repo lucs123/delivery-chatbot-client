@@ -113,7 +113,7 @@ function Table(props) {
       { title: 'Nº do pedido', field: 'id', defaultSort:'desc', width: 100},
       { title: 'Pedido', field: 'pedido', width:190 },
       { title: 'Valor', field: 'valor' , width:100},
-      { title: 'Forma de entrega', field: 'formaentrega', width: 180},
+      { title: 'Forma de entrega', field: 'formaentrega', width: 150},
       { title: 'Endereço', field: 'endereco', width:190},
       { title: 'Status', field: 'status', width:110, 
        hidden:(props.status==='Todos')?false:true}

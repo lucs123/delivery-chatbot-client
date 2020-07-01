@@ -6,8 +6,8 @@ import Table from './components/Table.js'
 import socketIOClient from "socket.io-client";
 
 //  for local
-const ENDPOINT = "localhost:5000";
-// const ENDPOINT = "https://fierce-mountain-64147.herokuapp.com/";
+// const ENDPOINT = "localhost:5000";
+const ENDPOINT = "https://fierce-mountain-64147.herokuapp.com/";
 const socket = socketIOClient(ENDPOINT);
 
 const styles = (theme) => ({
