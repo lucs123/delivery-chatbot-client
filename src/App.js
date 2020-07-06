@@ -14,6 +14,11 @@ const socket = socketIOClient(ENDPOINT);
 const styles = (theme) => ({
   root: {
     display: 'flex',
+    height: 'calc(100% - 60px)',
+    minHeight: '100vh',
+    // overflow: 'hidden',
+     position: 'relative',
+ 	paddingBottom: '100px'
   },
   table: {
     paddingTop: "68px",
@@ -21,7 +26,8 @@ const styles = (theme) => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(1),
   },
-})
+
+  })
 
 class App extends Component {
 	constructor(){
@@ -32,7 +38,7 @@ class App extends Component {
 		};
 	}
 	componentDidMount() {
-		fetch('https://fierce-mountain-64147.herokuapp.com/pedidos')
+		fetch('/pedidos')
 		.then(response=>(
 			response.json()))
 		.then(response=>{
@@ -86,7 +92,7 @@ class App extends Component {
 	render () {
     	const { classes } = this.props;
 		return (
-		<div className="root">
+		<div className={classes.root}>
 		    <Grid container>
 		      <Grid item xs={'auto'}>  
 		        <ResponsiveDrawer status={this.status} changePage={this.changePage}/>
