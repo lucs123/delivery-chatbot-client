@@ -3,11 +3,12 @@ import './App.css';
 import {Grid,withStyles} from '@material-ui/core';
 import ResponsiveDrawer from './components/Drawer.js'
 import Table from './components/Table.js'
+import Footer from './components/Footer.js'
 import socketIOClient from "socket.io-client";
 
 //  for local
 // const ENDPOINT = "localhost:5000";
-const ENDPOINT = "https://fierce-mountain-64147.herokuapp.com/";
+const ENDPOINT = "/";
 const socket = socketIOClient(ENDPOINT);
 
 const styles = (theme) => ({
@@ -97,6 +98,7 @@ class App extends Component {
 		        </Grid>
 		      </div>
 		    </Grid>
+		    <Footer/>
 		</div>
 		);
     }

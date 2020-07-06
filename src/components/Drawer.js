@@ -11,6 +11,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import MotorcycleIcon from '@material-ui/icons/Motorcycle';
 import TimelapseIcon from '@material-ui/icons/Timelapse';
@@ -20,6 +21,8 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 const status = ['Todos','Novo','Fazendo','Para entrega', 'Aguardando retirada', 'Finalizado'];
 const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />, <DoneAllIcon />]
@@ -94,7 +97,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Pedidos
+            Painel de pedidos
           </Typography>
         </Toolbar>
       </AppBar>
