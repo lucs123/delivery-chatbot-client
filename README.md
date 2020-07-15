@@ -1,7 +1,9 @@
 # Delivery chatbot
+Esta é a versão do projeto delivery chatbot criada utilizando o firebase realtime database, para ver a versão criada utilizando banco de dados relacional acesse:https://github.com/lucs123/delivery-chatbot-client  
 Chatbot criado para delivery de pizzaria, é possivel fazer pedidos, consultar as opções e verificar o status do pedido através do chatbot.
 Os pedidos são enviados para o painel de controle, onde é possivel alterar o status e finalizar os pedidos.  
-Feito com Node.js no backend, React.js com Material Ui no frontend e chatbot com o dialogflow da google.
+Feito com Node.js no backend, React.js com Material Ui no frontend e chatbot com o dialogflow da google.  
+A demonstração pode ser acessada em:https://painel-delivery.herokuapp.com/
 
 ## Prévia
 ![](Screenshots/Screenshot.png)
