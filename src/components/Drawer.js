@@ -7,6 +7,7 @@ import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -20,6 +21,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import auth from '../auth'
 
 const status = ['Todos','Novo','Fazendo','Para entrega', 'Aguardando retirada', 'Finalizado'];
 const icons = [<ListAltIcon />,<InboxIcon />,<TimelapseIcon />,<MotorcycleIcon />,<DoneIcon />, <DoneAllIcon />]
@@ -50,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  logoutButton:{
+    marginLeft:'auto'
+  }
 }));
 
 function ResponsiveDrawer(props) {
@@ -61,6 +66,10 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleLogout = () => {
+    auth.logout()
+  }
 
   const drawer = (
     <div>
@@ -96,6 +105,7 @@ function ResponsiveDrawer(props) {
           <Typography variant="h6" noWrap>
             Painel de pedidos
           </Typography>
+          <Button color="inherit" className={classes.logoutButton} onClick={handleLogout}>sair</Button>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

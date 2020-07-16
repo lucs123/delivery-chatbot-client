@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
+import {Router} from 'react-router-dom'
+import {history} from './history'
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Router history = {history}>
     <Routes />
-  </React.StrictMode>,
+  </Router>,
   document.getElementById('root')
 );
 
