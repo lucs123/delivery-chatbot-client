@@ -55,7 +55,7 @@ class Login extends Component {
 
   handleSubmit = async (event)=>{
     event.preventDefault()
-    auth.login()
+    auth.login(this.state.email, this.state.password)
     // await auth.login(this.state.email, this.state.password);
     // let err = auth.logError()
     // if(err){

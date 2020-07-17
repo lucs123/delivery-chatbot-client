@@ -5,9 +5,22 @@ class Auth {
     this.authenticated = false;
   }
 
-  login() {
-    this.authenticated = true;
-    history.push('/')
+  login(email, pass) {
+        (async () => {
+      const rawResponse = await fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({email: email, password: pass})
+      });
+      const content = await rawResponse.json();
+
+      console.log(content)
+    })();
+    // this.authenticated = true;
+    // history.push('/')
   }
 
   logout() {
@@ -19,5 +32,7 @@ class Auth {
     return this.authenticated;
   }
 }
+
+
 
 export default new Auth();

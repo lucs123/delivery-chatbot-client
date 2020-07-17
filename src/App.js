@@ -7,7 +7,6 @@ import Footer from './components/Footer.js'
 import socketIOClient from "socket.io-client";
 
 //  for local
-// const ENDPOINT = "localhost:5000";
 const ENDPOINT = "/";
 const socket = socketIOClient(ENDPOINT);
 
@@ -16,7 +15,6 @@ const styles = (theme) => ({
     display: 'flex',
     height: 'calc(100% - 60px)',
     minHeight: '100vh',
-    // overflow: 'hidden',
      position: 'relative',
  	paddingBottom: '100px'
   },
