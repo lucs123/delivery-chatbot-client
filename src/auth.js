@@ -5,7 +5,7 @@ class Auth {
     this.authenticated = false;
   }
 
-  async login(email, pass) {
+  login(email, pass) {
       return (async () => {
       const rawResponse = await fetch('/login', {
         method: 'POST',
@@ -16,7 +16,11 @@ class Auth {
         body: JSON.stringify({email: email, password: pass})
       });
       const content = await rawResponse.json();
-
+      
+      if(content.auth){
+        localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, content.token)
+        history.push('/')
+      }
       return content
     })();
   }

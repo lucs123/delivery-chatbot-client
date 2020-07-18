@@ -57,7 +57,6 @@ class Login extends Component {
     event.preventDefault()
     let res = await auth.login(this.state.email, this.state.password)
 
-    console.log(res)
     if(!res.auth){
       this.handleError(res.error)
     }     
