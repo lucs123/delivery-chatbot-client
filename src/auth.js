@@ -16,8 +16,12 @@ class Auth {
         body: JSON.stringify({email: email, password: pass})
       });
       const content = await rawResponse.json();
+      // console.log(rawResponse.headers.json())
+      console.log(content.token)
 
-      console.log(content)
+      if(content.auth){
+        localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, content.token)
+      }
     })();
     // this.authenticated = true;
     // history.push('/')
@@ -28,7 +32,27 @@ class Auth {
     history.push('/login')
   }
 
-  isAuthenticated() {
+  async isAuthenticated() {
+      const token = await localStorage.getItem(process.env.REACT_APP_TOKEN_KEY)
+      if(token){
+        console.log(token)
+
+      const rawResponse = await fetch('/login/auth', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({token: token})
+      });
+      const content = await rawResponse.json();
+      console.log(content)
+
+      // if(content.auth){
+      //   localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, content.token)
+      // }
+
+    }
     return this.authenticated;
   }
 }
