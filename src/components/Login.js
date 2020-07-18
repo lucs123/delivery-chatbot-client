@@ -55,37 +55,34 @@ class Login extends Component {
 
   handleSubmit = async (event)=>{
     event.preventDefault()
-    auth.login(this.state.email, this.state.password)
-    // await auth.login(this.state.email, this.state.password);
-    // let err = auth.logError()
-    // if(err){
-    //   this.handleError()
-    // }     
+    let res = await auth.login(this.state.email, this.state.password)
+
+    console.log(res)
+    if(!res.auth){
+      this.handleError(res.error)
+    }     
   }
 
-  // handleError = () => {
-  //   let errMessage;
-  //   switch(auth.errCode){
-  //     case('auth/wrong-password'):
-  //       errMessage = 'Senha inválida'
-  //       this.setState({
-  //         passErr:{
-  //           error:true,
-  //           helperText:errMessage
-  //         }
-  //       })
-  //       break
-  //     case('auth/user-not-found'):
-  //       errMessage = 'Email inválido'
-  //       this.setState({
-  //         emailErr:{
-  //           error:true,
-  //           helperText:errMessage
-  //         }
-  //       })
-  //       break    
-  //   }
-  // }
+  handleError = (res) => {
+    switch(res){
+      case('Senha inválida'):
+        this.setState({
+          passErr:{
+            error:true,
+            helperText:res
+          }
+        })
+        break
+      case('Email inválido'):
+        this.setState({
+          emailErr:{
+            error:true,
+            helperText:res
+          }
+        })
+        break    
+    }
+  }
 
   render(){
   const {classes} = this.props;

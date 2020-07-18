@@ -6,7 +6,7 @@ class Auth {
   }
 
   async login(email, pass) {
-      await  (async () => {
+      return (async () => {
       const rawResponse = await fetch('/login', {
         method: 'POST',
         headers: {
@@ -17,11 +17,8 @@ class Auth {
       });
       const content = await rawResponse.json();
 
-      if(content.auth){
-        localStorage.setItem(process.env.REACT_APP_TOKEN_KEY, content.token)
-      }
+      return content
     })();
-    history.push('/')
   }
 
   logout() {
@@ -50,6 +47,7 @@ class Auth {
     }
     return this.authenticated;
   }
+
 }
 
 
